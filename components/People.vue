@@ -57,6 +57,8 @@
             </p>
             <el-button
               @click="toggleFavorite(person)"
+              v-bind:class="{ 'i-am-active': button_active_state }"
+              v-on:click="button_active_state = !button_active_state"
               type="primary"
               :icon="`el-icon-star-${isFavorite(person.name)}`"
               circle
@@ -90,6 +92,8 @@ export default {
       },
       searchText: "",
       gender: "", // all
+      button_active_state: false,
+
       loading: false, // TODO:: ADD IT!
     };
   },
@@ -118,15 +122,13 @@ export default {
       );
       console.log("people", this.people);
     },
+
     toggleFavorite(person) {
-      console.log
       console.log(person);
       if (localStorage.getItem(person.name)) {
         localStorage.removeItem(person.name);
-        return this.isFavorite(person.name);
       } else {
         localStorage.setItem(person.name, JSON.stringify(person));
-        return this.isFavorite(person.name);
       }
     },
 

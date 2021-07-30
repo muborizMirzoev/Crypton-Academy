@@ -25,6 +25,8 @@
             <p class="cards__item-name">{{ JSON.parse(person).name }}</p>
             <el-button
               @click="toggleFavorite(JSON.parse(person))"
+              v-bind:class="{ 'i-am-active': button_active_state }"
+              v-on:click="button_active_state = !button_active_state"
               type="primary"
               :icon="`el-icon-star-on`"
               circle
@@ -40,7 +42,9 @@
 export default {
   name: "Favorite",
   data() {
-    return {};
+    return {
+      button_active_state: false,
+    };
   },
 
   computed: {
