@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="20" :offset="2" style="margin-top: 40px">
+      <el-col :span="22" :offset="1" style="margin-top: 40px">
         <NuxtLink class="main-page" to="/">Main page</NuxtLink>
       </el-col>
     </el-row>

@@ -1,30 +1,35 @@
 <template>
   <div class="wrapper">
     <el-row>
-      <el-col :span="20" :offset="2" style="margin-top: 40px">
+      <el-col :span="20" :offset="1" style="margin-top: 30px">
         <NuxtLink class="favorites-page" to="/favourite"
           >Favorites page</NuxtLink
         >
       </el-col>
     </el-row>
 
-    <el-row type="flex" align="middle">
-      <el-col :span="11" :offset="2">
+    <el-row type="flex" justify="space-between" style="flex-wrap: wrap">
+      <el-col
+        :xs="24"
+        :sm="24"
+        :md="14"
+        :lg="15"
+        :xl="15"
+        style="margin-bottom: 20px"
+      >
         <el-input
           v-model="searchText"
           placeholder="input Name"
           prefix-icon="el-icon-search"
         />
       </el-col>
-      <el-col :span="10" :offset="1">
+      <el-col :xs="24" :sm="14" :md="8" :lg="7" :xl="5">
         <div class="filter">
-          <el-radio v-model="gender" border label="" size="medium"
-            >All</el-radio
-          >
-          <el-radio v-model="gender" border label="male" size="medium"
+          <el-radio v-model="gender" border label="" size="small">All</el-radio>
+          <el-radio v-model="gender" border label="male" size="small"
             >Male</el-radio
           >
-          <el-radio v-model="gender" border label="female" size="medium"
+          <el-radio v-model="gender" border label="female" size="small"
             >Female</el-radio
           >
         </div>
@@ -68,17 +73,15 @@
       </div>
     </section>
 
-    <el-row>
-      <el-col :span="16" :offset="8">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :page-size="10"
-          :total="people.count"
-          @current-change="changePag"
-        />
-      </el-col>
-    </el-row>
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-size="10"
+        :total="people.count"
+        @current-change="changePag"
+      />
+    </div>
   </div>
 </template>
 
@@ -182,7 +185,13 @@ img {
 }
 
 .el-row {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
 }
 
 .main-page,
