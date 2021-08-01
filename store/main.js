@@ -1,32 +1,28 @@
 // state
 export const state = () => ({
-  people: [],
-  favorites: []
+  planets: [],
 })
 
 // getters
 export const getters = {
-  favorites: s => s.favorites,
+  planets: s => s.planets,
 }
 
 export const mutations = {
-  SET_PEOPLE (state, people) {
-    state.people = people
-  },
-  SET_FAVORITE (state, favorites) {
-    state.favorites = favorites
+  SET_PLANETS (state, planets) {
+    state.planets = planets
   },
 }
 
 export const actions = {
-  fetchPeople ({ commit }) {
-    const people = this.$axios.$get('')
-    console.log('people', people)
+  async fetchPlanets ({ commit }) {
+    const planets = []
 
-    commit('SET_PEOPLE', people)
+    for (let i = 1; i <= 6; i++) {
+      const { results } = await this.$axios.$get(`https://swapi.dev/api/planets/?page=${i}`);
+      planets.push(...results);
+    }
+  
+    commit('SET_PLANETS', planets)
   },
-  setFavorite ({ commit }, favorite) {
-    console.log('favorite', favorite)
-    commit('SET_FAVORITE', favorite)
-  }
 }

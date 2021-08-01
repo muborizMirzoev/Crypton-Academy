@@ -1,36 +1,33 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="22" :offset="1" style="margin-top: 40px">
-        <NuxtLink class="main-page" to="/">Main page</NuxtLink>
+      <el-col :span='22' :offset='1' style='margin-top: 40px'>
+        <NuxtLink class='main-page' to='/'>Main page</NuxtLink>
       </el-col>
     </el-row>
 
-    <section class="cards">
-      <div class="section__wrapper">
+    <section class='cards'>
+      <div class='section__wrapper'>
         <div
-          class="cards__item"
-          v-for="(person, index) in getLocalStorage"
-          :key="index"
+          class='cards__item'
+          v-for='(person, index) in favourites'
+          :key='index'
         >
-          <img
-            :src="`https://starwars-visualguide.com/assets/img/characters/${
-              JSON.parse(
-                getLocalStorage.getItem(JSON.parse(person).name)
-              ).url.match(/\d+/)[0]
-            }.jpg`"
-            class="image"
-          />
-          <div class="cards__item-info">
-            <p class="cards__item-name">{{ JSON.parse(person).name }}</p>
+          <div class='card__item-img'>
+            <img :src='person.img' class='image' />
             <el-button
-              @click="toggleFavorite(JSON.parse(person))"
-              v-bind:class="{ 'i-am-active': button_active_state }"
-              v-on:click="button_active_state = !button_active_state"
-              type="primary"
-              :icon="`el-icon-star-on`"
+              @click='toggleFavorite(person)'
+              type='primary'
+              :icon="`el-icon-star-${person.isFavorite ? 'on' : 'off'}`"
               circle
             />
+          </div>
+          <div class='cards__item-info'>
+            <p class='cards__item-name'>Name: {{ person.name }}</p>
+            <p class='cards__item-birth_year'>Birth Year: {{ person.birth_year }}</p>
+            <p class='cards__item-height'>Height: {{ person.height }}</p>
+            <p class='cards__item-mass'>Mass: {{ person.mass }}</p>
+            <p class='cards__item-homeworld'>Homeworld: {{ person.homeworld }}</p>
           </div>
         </div>
       </div>
@@ -40,33 +37,35 @@
 
 <script>
 export default {
-  name: "Favorite",
+  name: 'Favorite',
   data() {
     return {
-      button_active_state: false,
+      favourites: [],
     };
   },
 
+
+  async mounted() {
+    const locFav = localStorage.getItem('favorites');
+    this.favourites = JSON.parse(locFav) || [];
+  },
+
+
   computed: {
     getLocalStorage() {
-      console.log(localStorage);
-      return localStorage;
+      return this.favourites;
     },
   },
 
   methods: {
     toggleFavorite(person) {
-      if (localStorage.getItem(person.name)) {
-        localStorage.removeItem(person.name);
-        return this.isFavorite(person.name);
-      } else {
-        localStorage.setItem(person.name, JSON.stringify(person));
-        return this.isFavorite(person.name);
+      const personIdx = this.favourites.findIndex((p) => p.url === person.url);
+
+      if (personIdx > -1) {
+        this.favourites.splice(personIdx, 1);
       }
-    },
-    isFavorite(name) {
-      console.log(!!localStorage.getItem(name));
-      return !!localStorage.getItem(name) ? "on" : "off";
+
+      localStorage.setItem('favorites', JSON.stringify(this.favourites));
     },
   },
 };
@@ -76,6 +75,7 @@ export default {
 .el-row {
   margin-bottom: 40px;
 }
+
 .cards {
   width: 100%;
 }
@@ -91,6 +91,10 @@ export default {
   background-color: #fff;
 }
 
+.card__item-img {
+  position: relative;
+}
+
 .cards__item img {
   width: 100%;
   height: auto;
@@ -101,6 +105,13 @@ img {
   height: auto;
 }
 
+.el-button {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  padding: 14px;
+  font-size: 20px;
+}
 .cards__item-info {
   padding: 8px 14px 14px 14px;
 }
