@@ -2,7 +2,8 @@
   <div class='wrapper'>
     <el-row>
       <el-col :span='20' :offset='1' style='margin-top: 30px'>
-        <NuxtLink class='favorites-page' to='/favourite'>Favorites page</NuxtLink >
+        <NuxtLink exact active-class="active" class='main-page' to='/'>Main page</NuxtLink>
+        <NuxtLink exact active-class="active" class='favorites-page' to='/favourite'>Favorites page</NuxtLink >
       </el-col>
     </el-row>
 
@@ -139,6 +140,7 @@ export default {
         `https://swapi.dev/api/people/?page=${page}`
       );
       this.loading = true;
+      console.log(this.people);
     },
 
     toggleFavorite(person) {
@@ -222,6 +224,10 @@ img {
   color: white;
   font-size: 20px;
   padding-right: 20px;
+}
+
+.active {
+  color: #409eff;
 }
 
 .main-page:hover,

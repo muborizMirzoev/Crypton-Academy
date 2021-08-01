@@ -2,7 +2,8 @@
   <div>
     <el-row>
       <el-col :span='22' :offset='1' style='margin-top: 40px'>
-        <NuxtLink class='main-page' to='/'>Main page</NuxtLink>
+        <NuxtLink exact active-class="active" class='main-page' to='/'>Main page</NuxtLink>
+        <NuxtLink exact active-class="active" class='favorites-page' to='/favourite'>Favorites page</NuxtLink >
       </el-col>
     </el-row>
 
@@ -128,6 +129,10 @@ img {
   color: white;
   font-size: 20px;
   padding-right: 20px;
+}
+
+.active {
+  color: #409eff;
 }
 
 .main-page:hover,
