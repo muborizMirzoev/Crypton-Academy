@@ -2,8 +2,8 @@
   <div class='wrapper'>
     <el-row>
       <el-col :span='20' :offset='1' style='margin-top: 30px'>
-        <NuxtLink exact active-class="active" class='main-page' to='/'>Main page</NuxtLink>
-        <NuxtLink exact active-class="active" class='favorites-page' to='/favourite'>Favorites page</NuxtLink >
+        <NuxtLink exact  active-class="active" class='main-page' to='/'>Main page</NuxtLink>
+        <NuxtLink exact  no-prefetch active-class="active" class='favorites-page' to='/favourite'>Favorites page</NuxtLink >
       </el-col>
     </el-row>
 
