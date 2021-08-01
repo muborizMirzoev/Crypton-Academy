@@ -134,17 +134,19 @@ export default {
 <style scoped>
 .cards {
   width: 100%;
+  
 }
 
 .section__wrapper {
   margin-bottom: 52px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(316px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 44px 26px;
 }
 
 .cards__item {
   background-color: #fff;
+  box-shadow: 0px 0px 12px 0px rgb(172, 172, 172);
 }
 
 .card__item-img {
@@ -181,6 +183,10 @@ img {
 
 .el-row {
   margin-bottom: 20px;
+}
+
+.el-radio {
+  color: #ffffff;
 }
 
 .pagination {
